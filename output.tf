@@ -1,0 +1,105 @@
+output "instance_id" {
+  value       = aws_instance.default[*].id
+  description = "The instance ID."
+}
+
+output "arn" {
+  value       = aws_instance.default[*].arn
+  description = "The ARN of the instance."
+}
+
+output "az" {
+  value       = aws_instance.default[*].availability_zone
+  description = "The availability zone of the instance."
+}
+
+output "public_ip" {
+  value       = concat(aws_eip.default[*].public_ip, aws_instance.default[*].public_ip, [""])
+  description = "Public IP of instance (or EIP)."
+
+}
+
+output "private_ip" {
+  value       = aws_instance.default[*].private_ip
+  description = "Private IP of instance."
+}
+
+output "placement_group" {
+  value       = join("", aws_instance.default[*].placement_group)
+  description = "The placement group of the instance."
+}
+
+output "key_name" {
+  value       = join("", aws_instance.default[*].key_name)
+  description = "The key name of the instance."
+}
+
+output "ipv6_addresses" {
+  value       = aws_instance.default[*].ipv6_addresses
+  sensitive   = true
+  description = "A list of assigned IPv6 addresses."
+}
+
+output "vpc_security_group_ids" {
+  value       = aws_instance.default[*].vpc_security_group_ids
+  sensitive   = true
+  description = "The associated security groups in non-default VPC."
+}
+
+output "subnet_id" {
+  value       = aws_instance.default[*].subnet_id
+  sensitive   = true
+  description = "The EC2 subnet ID."
+}
+
+output "name" {
+  value       = join("", aws_key_pair.default[*].key_name)
+  description = "Name of SSH key."
+}
+
+output "spot_instance_id" {
+  value       = aws_spot_instance_request.default[*].spot_instance_id
+  description = "The instance ID."
+}
+
+output "spot_bid_status" {
+  description = "The current bid status of the Spot Instance Request"
+  value       = join("", aws_spot_instance_request.default[*].spot_bid_status)
+}
+
+output "tags" {
+  value       = module.labels.tags
+  description = "The instance ID."
+}
+output "ebs_volume_ids" {
+  value       = aws_ebs_volume.default[*].id
+  description = "The list of EBS volume IDs"
+}
+
+output "volume_attachment_ids" {
+  value       = aws_volume_attachment.default[*].id
+  description = "The list of volume attachment IDs"
+}
+
+output "route53_record_name" {
+  value       = aws_route53_record.default[*].name
+  description = "The name of the Route 53 DNS record."
+}
+
+output "route53_record_set_identifier" {
+  value       = aws_route53_record.default[*].set_identifier
+  description = "The unique identifier for the DNS record."
+}
+
+output "route53_record_health_check" {
+  value       = aws_route53_record.default[*].health_check_id
+  description = "The health check ID for the Route 53 DNS record."
+}
+output "kms_tags_debug" {
+  value = module.labels.tags
+}
+
+output "private_key_pem" {
+  value       = length(tls_private_key.default) > 0 ? tls_private_key.default[0].private_key_pem : null
+  description = "The private key PEM (if generated)."
+}
