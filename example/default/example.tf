@@ -15,7 +15,7 @@ locals {
 ## A VPC is a virtual network that closely resembles a traditional network that you'd operate in your own data center.
 ##=====================================================================================
 module "vpc" {
-  source      = "git::git::https://github.com/chahalvikas2022/terraform-aws-vpc.git"
+  source      = "git::https://github.com/chahalvikas2022/terraform-aws-vpc.git"
   name        = "app"
   environment = local.environment
   label_order = local.label_order
